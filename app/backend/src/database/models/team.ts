@@ -1,6 +1,6 @@
 import { Model, STRING, INTEGER } from 'sequelize';
 import db from '.';
-import Matche from './matche';
+import Match from './match';
 
 class Team extends Model {
   public id!: number;
@@ -28,10 +28,10 @@ Team.init(
   },
 );
 
-Matche.belongsTo(Team, { foreignKey: 'homeTeam', as: 'teamHome' });
-Matche.belongsTo(Team, { foreignKey: 'awayTeam', as: 'teamAway' });
+Match.belongsTo(Team, { foreignKey: 'homeTeam', as: 'teamHome' });
+Match.belongsTo(Team, { foreignKey: 'awayTeam', as: 'teamAway' });
 
-Team.hasMany(Matche, { foreignKey: 'homeTeam', as: 'teamHome' });
-Team.hasMany(Matche, { foreignKey: 'awayTeam', as: 'teamAway' });
+Team.hasMany(Match, { foreignKey: 'homeTeam', as: 'teamHome' });
+Team.hasMany(Match, { foreignKey: 'awayTeam', as: 'teamAway' });
 
 export default Team;
