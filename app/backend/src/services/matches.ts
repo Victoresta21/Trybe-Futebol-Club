@@ -1,6 +1,7 @@
 import Team from '../database/models/team';
 import Match from '../database/models/match';
 import IMatch from '../Interface/Imatch';
+import IUpdateMatch from '../Interface/IupdateMatch';
 import error from '../util/errorMensage';
 
 class MatchesService {
@@ -42,6 +43,11 @@ class MatchesService {
 
   public update = async (id: string) => {
     await Match.update({ inProgress: false }, { where: { id } });
+  };
+
+  public updateCurrentMatch = async (id: string, matchData: IUpdateMatch) => {
+    await Match.update(matchData, { where: { id } });
+    console.log(id, matchData);
   };
 }
 

@@ -1,4 +1,5 @@
 import { NextFunction, Request, Response } from 'express';
+import IUpdateMatch from '../Interface/IupdateMatch';
 import MatchesService from '../services/matches';
 
 class MatchesController {
@@ -33,6 +34,17 @@ class MatchesController {
       const { id } = req.params;
       await this.service.update(id);
       return res.status(200).json({ message: 'Finished' });
+    } catch (error) {
+      next(error);
+    }
+  };
+
+  public updateCurrentMatch = async (req: Request, res: Response, next: NextFunction) => {
+    try {
+      const { id } = req.params;
+      const matchData = req.body;
+      await this.service.updateCurrentMatch(id, matchData as IUpdateMatch);
+      return res.status(200).json({});
     } catch (error) {
       next(error);
     }
